@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Shelters Shop • Страница не найдена{% endblock %}
+
+{% block content%}
+
+<audio id="idiot" src="{% static "main/sounds/idiotDornan.mp3" %}" preload="auto" type="audio/mp3"></audio>
+
+<button onclick="playAudio()" id='funnyButton'>тык</button>
+
+<script>
+    function playAudio() {
+        var idiotDornan = document.getElementById('idiot');
+        setTimeout(function() {
+            window.location.href = '{% url "home" %}';
+        }, 4500);
+        idiotDornan.play();
+    }
+    
+</script>
+    
+
+{% endblock %}

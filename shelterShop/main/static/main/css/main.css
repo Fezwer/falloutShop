@@ -1,0 +1,531 @@
+@font-face {
+    font-family: 'fallout';
+    src: url('../../fonts/fallout.ttf') format('truetype');
+}
+
+body{
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: rgb(8, 0, 35);
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+    margin: 0;
+    font-family: 'fallout', sans-serif;
+    user-select: none;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    margin-bottom: 2em;
+}
+
+.infoAbout{
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.infoAbout h1{
+    margin: 0;
+    text-align: left;
+    justify-content:flex-start;
+    width: 100%;
+    font-size: 56px;
+}
+
+header{
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    height: 40px;
+}
+
+header a{
+    --text-color: rgb(255, 255, 255);
+    color: var(--text-color);
+    font-size: larger;
+    font-weight: 400;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2vw;
+    margin-top: 20px;
+}
+
+.infoBlock{
+    display: flex;
+    position: relative;
+    z-index: 1;
+    justify-content: space-between;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    max-width: 96vw;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 5em;
+}
+
+.infoBlock h2{
+    margin: 0 2%;
+    max-width: 45%;
+}
+
+.infoBlock img{
+    max-width: 50%;
+    border-radius: 17px;
+    rotate: 1 .5 0 45deg;
+}
+
+#mainButton{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    background-color: rgba(0, 128, 0, 0);
+    border: 0;
+    color: rgb(255, 255, 255);
+    &:hover{
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+}
+
+.newPage{
+    background-color: rgba(0, 128, 0, 0);
+    border: 0;
+    margin-bottom: 5em;
+    font-size: 20px;
+    font-weight: 900;
+    color: rgb(255, 255, 255);
+
+    &:hover{
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+}
+
+.cardHolder{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.card{
+    position: relative;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 360px;
+    width: 280px;
+    color: rgb(53, 150, 202);
+    border: 2px solid #3f3f3f;
+    background-image: url('../img/metal.png');
+    background-image: linear-gradient(rgba(32, 32, 32, 0.7), rgba(32, 32, 32, 0.7)), url("../img/metal.png");
+    border-top-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    background-color: #202020;
+}
+
+.card img{
+    width: 98%;
+    border-radius: 17px;
+}
+
+.card h2{
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.card h3{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.card button{
+    font-size: medium;
+}
+
+@keyframes showFullInfo{
+    0% {transform:translateX(0); }
+    100% {transform: translateX(-110%);}
+}
+
+.fullShelterInfo{
+    --otstyp-right: -45%;
+    color: rgb(53, 150, 202);
+    padding: 0 5px ;
+    padding-top: 41px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    align-items: center;
+    top: 0;
+    right: var(--otstyp-right);
+    background-color: rgb(32, 32, 32);
+    height: 100%;
+    width: 40%;
+    
+}
+
+.fullShelterInfo #close{
+    font-size: 24px;
+    height: 25px;
+    top: 7%;
+    right: 8px;
+}
+
+.fullShelterInfo img{
+    width: 98%;
+}
+
+.fullShelterInfo h3{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.fullShelterInfo button{
+    color: white;
+    position: absolute;
+    bottom: 60px;
+    font-weight: 400;
+    font-size: 16px;
+
+    &:hover{
+        color: black;
+    }
+}
+
+.fullShelterInfo h2{
+    margin-bottom: 0px;
+}
+
+.fullShelterInfo p{
+    text-align: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.logReg{
+    position: relative;
+    margin-top: 15vh;
+    background-color: #00005a;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    padding-top: 40px;
+    border: 1px rgba(0, 105, 255, 0.3) solid;
+    box-shadow: 0 0 500px rgba(0,105,255,0.5);
+}
+
+.logReg h1{
+    position: absolute;
+    top: -60px;
+}
+
+.logReg h3{
+    width: 300px;
+    text-align: left;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.logReg input{
+    width: 300px;
+    height: 30px;
+    border: 0;
+    padding: 5px;
+    outline: solid rgb(255, 255, 255) 2px;
+}
+
+.logReg input:hover{
+    outline: solid rgb(1, 77, 171) 2px;
+}
+
+.logReg button{
+    width: 60%;
+}
+
+.logReg a{
+    color: white;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    margin-bottom: 10px
+}
+
+.profileInfo{
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-family: 'Roboto', sans-serif;
+}
+
+.profileInfo h1{
+    font-family: 'fallout', sans-serif;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+.profileValtBoy{
+    position: fixed;
+    right: -100px;
+    bottom: -10px;
+}
+
+
+.profileInfo img{
+    width: auto;
+    height: 1em;
+}
+
+.cartList{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 70%;
+    color: rgb(53, 150, 202);
+}
+
+.cartItem{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 60px;
+    padding: 10px 0;
+    border: 2px solid black;
+}
+
+.cartItem p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0;
+}
+
+.cartItem h5{
+    margin: 0;
+}
+
+.cartItem img{
+    height: 98%;
+    border-radius: 17px;
+}
+
+.cartItem form{
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.cartItemMoney{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.cartItemMoney p:last-of-type{
+    margin-left: 20px;
+}
+
+.fullPurchase{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.fullPurchase img{
+    width: 1em;
+    height: auto;
+}
+
+#funnyButton{
+    font-size: 100px;
+}
+
+#paymentForm{
+    margin-bottom: 3em;
+}
+
+#buttonLogout{
+    margin-bottom: 5em;
+}
+
+#buttonChangePassword{
+    margin-top: 3em;
+}
+
+#buttonChangePassword button{
+    color: red;
+    text-decoration: underline;
+
+    &:hover{
+        color: white;
+        background-color: red;
+    }
+}
+
+.changePassForm{
+    position: relative;
+    margin-top: 15vh;
+    background-color: #00005a;
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    padding-top: 40px;
+    border: 1px rgba(0, 105, 255, 0.3) solid;
+    box-shadow: 0 0 500px rgba(0,105,255,0.5);
+}
+
+.changePassForm h1{
+    position: absolute;
+    top: -60px;
+}
+
+.changePassForm h3{
+    width: 300px;
+    text-align: left;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.changePassForm input{
+    width: 300px;
+    height: 30px;
+    border: 0;
+    padding: 5px;
+    outline: solid rgb(255, 255, 255) 2px;
+}
+
+.changePassForm input:hover{
+    outline: solid rgb(1, 77, 171) 2px;
+}
+
+.changePassForm button{
+    margin-top: 1.5em;
+    width: 60%;
+}
+
+.changePassForm .errorlist{
+    margin: 0;
+    font-size: small;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    width: 300px;
+}
+
+/* Это анимации для загрузочного экрана */
+.loader{
+    display: flex;
+    position: relative;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}   
+
+@keyframes openDoor{
+    0% {transform: rotate(0); }
+    5% {transform: rotate(-10deg);}
+    100% {transform: rotate(360deg);}
+}
+@keyframes translateDoor{
+    0% {transform:translateX(0); }
+    5% {transform: translateX(-3vw);}
+    100% {transform: translateX(100vw);}
+}
+
+#centralDoor{
+    width: auto;
+    height: 100vh;
+    /* animation: openDoor 10s ; */
+}
+
+#centralTranslate{
+    position: fixed;
+    top: 0;
+    /* animation: translateDoor 15s; */
+}
+
+@keyframes translateLeftWall{
+    0% {transform:translateX(0); }
+    100% {transform: translateX(-100vw);}
+}
+@keyframes translateRightWall{
+    0% {transform:translateX(0); }
+    100% {transform: translateX(100vw);}
+}
+
+#leftWall{
+    position: fixed;
+    top: 0;
+    width: auto;
+    height: 100vh;
+    /* animation: translateLeftWall 15s; */
+}
+#rightWall{
+    position: fixed;
+    top: 0;
+    width: auto;
+    height: 100vh;
+    /* animation: translateRightWall 15s; */
+}
+#rightWallExtra{
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgb(80,80,80);
+    height: 100vh;
+    width: 20vw;
+    /* animation: translateRightWall 15s; */
+}
+#leftWallExtra{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 20vw;
+    background-color: rgb(80,80,80);
+    /* animation: translateLeftWall 15s; */
+}

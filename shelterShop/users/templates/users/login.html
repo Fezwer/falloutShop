@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Shelters Shop • Вход{% endblock %}
+
+{% block content%}
+
+<form class = 'logReg' method = 'post'>
+    <h1>SHELTERS<br>SHOP</h1>
+    <h3>Вход</h3>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a href="{% url "register" %}">Еще не зарегистрированы?</a>
+    <button type="submit">Войти</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Shelters Shop • Корзина{% endblock %}
+
+{% block content %}
+    <span class="cartList">
+        {% for reservation in user_reservations %}
+        <div class="cartItem">
+            <img src="{{ reservation.shelter.imgPath.url }}" alt="{{ reservation.shelter.name }}">
+            <span>
+                <h5>{{ reservation.shelter.name }}</h3>
+                <p>Количество забронированных мест: {{ reservation.quantity }}</p>
+                <span class='cartItemMoney'>
+                    <p>Цена за ед.: {{ reservation.shelter.price }}  рублей</p>
+                    <p>Сумма: {% widthratio reservation.shelter.price  1  reservation.quantity %}  рублей</p>
+                </span>
+            </span>
+            <form method="post" action="{% url 'delete_reservation' reservation.id %}">
+                {% csrf_token %}
+                <button class='delReservButton' type="submit"><i class='bx bxs-trash'></i></button>
+            </form>
+        </div>
+        {% endfor %}
+    </span>
+
+    <div class="fullPurchase">
+        <h3>Полная стоимость: {{total_cost}} <img src="{% static "main/img/cap.png" %}"></h3>
+        <button id="purchaseButton">Оформить покупку</button>
+    </div>
+
+    <script defer src="{% static "shop/js/purchase.js" %}"></script>
+{% endblock %}  

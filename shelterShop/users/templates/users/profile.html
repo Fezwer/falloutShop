@@ -1,0 +1,84 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Shelters Shop • Профиль{% endblock %}
+
+
+{% block content%}
+
+    <img src={% static "main/img/vault-bot-standart.png" %} class='profileValtBoy'>
+
+    <div class='profileInfo'>
+        <h1>Здравствуйте, {{username}} !<br>Благодарим вас за выбор Vault-Tec!</h1>
+        <h3>Ваш баланс: {{balance}} <img src="{% static "main/img/cap.png" %}"></h3>
+        <form id="paymentForm" method="post" action="{% url 'userPayment' %}">
+            {% csrf_token %}
+            <label for="amount">Введите сумму для пополнения:</label><br>
+            <input type="number" id="amount" name="amount" step="1" required>
+            <button type="submit">Пополнить баланс</button>
+        </form>
+        <h3>Ваши убежища:</h3>
+        {% for purchase in purchase_user %}
+            <div class="cartItem">
+                <img src="{{ purchase.shelter.imgPath.url }}" alt="{{ purchase.shelter.name }}">
+                <span>
+                    <h5>{{ purchase.shelter.name }}</h3>
+                        <p>Количество забронированных мест: {{ purchase.quantity }}</p>
+                        <p>Дата приобретения: {{ purchase.purchase_date }}</p>
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form id='buttonChangePassword' action="{% url 'changePassword' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Изменить пароль</button>
+    </form>
+    <form id='buttonLogout' action="{% url 'user_logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Выйти из профиля</button>
+    </form>
+
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Останавливаем отправку формы
+    
+            let amount = document.getElementById('amount').value;
+            amount = parseFloat(amount);
+    
+            // Проверяем, чтобы сумма была больше 0 и не менее 10 рублей
+            if (amount <= 0 || amount < 10) {
+                alert('Введите сумму больше 10 рублей.');
+                return;
+            }
+    
+            const formData = new FormData(this);
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', this.action, true);
+            xhr.setRequestHeader('X-CSRFToken', csrfToken);
+    
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // Обработка ответа от сервера после успешной отправки
+                        const responseData = JSON.parse(xhr.responseText);
+                        if (responseData.url) {
+                            window.location.href = responseData.url; // Перенаправление на URL
+                        } else {
+                            console.error('Не удалось получить URL из ответа сервера');
+                        }
+                    } else {
+                        // Обработка ошибок
+                        console.error('Ошибка при отправке данных: ' + xhr.status);
+                    }
+                }
+            };
+    
+            xhr.send(formData);
+        });
+    </script>
+    
+
+{% endblock %}

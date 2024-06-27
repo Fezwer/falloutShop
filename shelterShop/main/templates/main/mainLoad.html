@@ -1,0 +1,12 @@
+{% load static %}
+
+<div class="loader" id="load">
+    <span id='rightWallExtra'></span>
+    <span id='leftWallExtra'></span>
+    <img src="{% static "main/img/leftWall.png" %}" id="leftWall">
+    <img src="{% static "main/img/rightWall.png" %}" id="rightWall">
+    <span id="centralTranslate">
+        <img src="{% static "main/img/centralDoor.png" %}" id="centralDoor">
+    </span>
+</div>
+{% comment %} Это загрузочный экран для главной страницы(только для неё) {% endcomment %}

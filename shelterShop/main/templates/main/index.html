@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Shelters Shop • Главная{% endblock %}
+
+{% block loadScreen %}{% include "main/mainLoad.html" %}{% endblock %}
+
+{% block content%}
+
+    <h1>Добро пожаловать на Shelter's Shop!</h1>
+
+    {% include 'main/infoBlock.html' with text='Добро пожаловать на сайт по продаже убежищ от компании Vault-Tec!<br> Мы предлагаем лучшую защиту на случай ядерного апокалипсиса!' imgPath='main/img/vault-tec.png' %}
+    {% include 'main/infoBlock.html' with text='Настали тяжелые времена в мире. Ядерная угроза как никогда высока.<br> Что же делать?' imgPath='main/img/vault-boy-clever.png' %}
+    {% include 'main/infoBlock.html' with text='Спешите купить место в одном из наших убежищ!<br> Мы обещаем вам безопасность и комфорт при пребывании в них.' imgPath='main/img/vault-bot-standart.png' %}
+    <div id='mainButton'>
+        <button class="newPage" type="button" onclick="window.location.href='{% url "storage" %}'">Перейти к убежищам</button>
+    </div>
+    
+
+{% endblock %}

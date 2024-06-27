@@ -1,0 +1,94 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Shelters Shop • Магазин{% endblock %}
+
+{% block content %}
+
+
+    <span class="cardHolder">
+    {%for el in dataShelters%}
+        <div class="card">
+            <img src="{{ el.imgPath.url }}" data-image-path="{{ el.imgPath.url }}">
+            <h2> {{ el.name }} </h2>
+            <h3> 
+                {{ el.shortDescription|truncatechars_html:100 }}
+            </h3>
+            <button id='open-full-info'>Подробнее</button>
+        </div>
+    {% endfor %}
+    </span>
+
+    <div class="fullShelterInfo">
+        <button id='close'><i class='bx bx-x'></i></button>
+        <img src=""> 
+        <h2></h2>
+        <h3></h3>
+        <p class="availableQuantity"></p>
+        <p class="price"></p>
+        <button id='addToCart'>В корзину</button>
+      </div>
+      
+      
+    <script defer >
+    document.addEventListener('DOMContentLoaded', function () {
+        const openButtons = document.querySelectorAll('#open-full-info');
+        const fullShelterInfo = document.querySelector('.fullShelterInfo');
+        var dataShelters = JSON.parse("{{dataSheltersJS | escapejs}}");
+        var occupiedCounts = JSON.parse("{{ occupied_counts | escapejs }}");
+        var addedToCart = false;
+    
+    
+    
+        openButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                let index = Array.from(this.parentElement.parentElement.children).indexOf(this.parentElement);
+                let shelter = dataShelters[index];
+    
+                const addToCartButton = document.getElementById('addToCart');
+                addToCartButton.addEventListener('click', function () {
+                    const csrftoken = getCookie('csrftoken');
+    
+                    // Отправка AJAX запроса
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', '', true);
+                    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+    
+                    // Здесь добавьте данные для отправки
+                    const data = {
+                        'shelter_id': shelter.id
+                    };
+    
+                    xhr.onload = function () {
+                      if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.response);
+                        alert(response.message); // Обработка успешного ответа
+                    } else {
+                        alert('Ошибка. Статус:', xhr.status); // Обработка ошибки
+                    }
+                    };
+    
+                    xhr.send(JSON.stringify(data));
+                });
+    
+                let occupiedQuantity = occupiedCounts[shelter.id - 1] || 0;
+                fullShelterInfo.querySelector('img').src = '/media/' + shelter.imgPath;
+                fullShelterInfo.querySelector('h2').textContent = shelter.name;
+                fullShelterInfo.querySelector('h3').textContent = shelter.description;
+                fullShelterInfo.querySelector('.availableQuantity').textContent = 'Свободные места: ' +(shelter.available_quantity - occupiedQuantity);
+                fullShelterInfo.querySelector('.price').textContent = 'Цена: ' + shelter.price;
+    
+                fullShelterInfo.style.animation = "showFullInfo 0.5s forwards";
+            });
+        });
+    
+        document.getElementById('close').addEventListener('click', function () {
+            fullShelterInfo.style.animation = "";
+        });
+    
+    });
+        
+    </script>
+
+{% endblock %}  
